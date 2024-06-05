@@ -6,9 +6,16 @@ import Image from "react-bootstrap/Image";
 import { Routes, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
-
-import logo from "../Images/logo.png";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Registration from "./Registration";
+
+import logo from "../Images/Logo.png";
+import img1 from "../Images/homepage.jpg";
+import img2 from "../Images/homepage1.jpg";
+import img3 from "../Images/homepage2.webp";
+import img4 from "../Images/homepage3.webp";
 
 function Home() {
   let validate = (values) => {
@@ -36,12 +43,10 @@ function Home() {
         "Invalid password. Must contain atleast one special character.";
     }
 
-    if (!values.email) {
-      errors.email = "Required";
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
-      errors.email = "Invalid email address.";
+    if (!values.username) {
+      errors.username = "Required";
+    } else if (values.username.length > 15) {
+      errors.username = "Must be 15 characters or less";
     }
     return errors;
   };
@@ -49,7 +54,7 @@ function Home() {
   let SignupForm = () => {
     let formik = useFormik({
       initialValues: {
-        email: "",
+        username: "",
         password: "",
       },
       validate,
@@ -58,32 +63,33 @@ function Home() {
       },
     });
 
+    //add password aswell
     let handleLogin = () => {
-      if (formik.values.email !== "") {
+      if (formik.values.username !== "") {
         setLoggedIn(true);
-        setName(formik.values.email);
+        setName(formik.values.username);
       } else {
-        alert("Please enter your email.");
+        alert("Please enter your User Name.");
       }
     };
 
     return (
       <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="email" className="label">
-          Email
+        <label htmlFor="username" className="label">
+          User Name
         </label>
         <input
           className="input"
-          id="email"
-          name="email"
-          type="email"
+          id="username"
+          name="username"
+          type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.email}
-          placeholder="Email here"
+          value={formik.values.username}
+          placeholder="Username here"
         />
-        {formik.touched.email && formik.errors.email ? (
-          <div>{formik.errors.email}</div>
+        {formik.touched.username && formik.errors.username ? (
+          <div>{formik.errors.username}</div>
         ) : null}
 
         <br />
@@ -92,7 +98,7 @@ function Home() {
           Password
         </label>
         <input
-          style={{ marginRight: "30px" }}
+          style={{ marginLeft: "10px" }}
           className="input"
           id="password"
           name="password"
@@ -129,16 +135,14 @@ function Home() {
 
   return (
     <div>
-      <h1 style={{ color: " rgb(0, 55, 170)" }}>Colour City</h1>
-      <h4 style={{ color: " rgb(29, 113, 81)" }}>
-        Please log into your account.
-      </h4>
+      <Image src={logo} style={{ width: "350px" }} />
+      {!loggedIn && <h4>Please log into your account.</h4>}
 
       {/* if user is logged in this text will show with a logout button */}
       {loggedIn ? (
         <div>
-          <h1 style={{ color: "rgb(247, 234, 72)" }}>Welcome, {name}!</h1>
-          <h5 style={{ color: "rgb(247, 234, 72)" }}>Enjoy your shopping.</h5>
+          <h1>Welcome, {name}!</h1>
+          <h5>Enjoy your shopping.</h5>
           <button className="login" onClick={handleLogout}>
             Logout
           </button>
@@ -149,27 +153,67 @@ function Home() {
           <SignupForm />
         </div>
       )}
+      <hr />
+      <Container fluid>
+        <Row>
+          <Col>
+            <img style={{ width: "500px", height: "600px" }} src={img1} />
+          </Col>
+          <Col
+            style={{
+              textAlign: "center",
+              fontSize: "50px",
+              fontWeight: "500",
+            }}
+          >
+            Urban Grit, Grunge Chic:
+            <br /> Step into Obsidian Shadow's Streetwear World
+          </Col>
+          <Col>
+            <img style={{ width: "500px", height: "600px" }} src={img2} />
+          </Col>
+        </Row>
+        <hr />
+        <Row>
+          <Col xs={6}>
+            <img style={{ width: "600px" }} src={img3} />
+          </Col>
+          <Col className="caption">
+            Unleash your inner rebel with Obsidian Shadow's bold streetwear,
+            where every stitch tells a story of defiance and individuality.
+          </Col>
+        </Row>
+        <hr />
+        <Row>
+          <Col className="caption">
+            Embrace the urban wilderness alongside Obsidian Shadow, where our
+            streetwear resonates with the untamed energy of abandoned
+            graffiti-laden landscapes.
+          </Col>
+          <Col xs={6}>
+            <img style={{ width: "600px" }} src={img4} />
+          </Col>
+        </Row>
+        <hr />
+        <Row>
+          <Col></Col>
+        </Row>
+      </Container>
 
-      <p style={{ fontWeight: "700", color: "rgb(29, 113, 81)" }}>
+      <p style={{ fontWeight: "700" }}>
         Don't have a password yet? Sign up here
       </p>
 
-      <Routes>
-        <Route path="/reg" element={<Registration />} />
-      </Routes>
-      <nav>
-        <Link
-          to="/reg"
-          style={{
-            color: "rgb(0, 55, 170)",
-            fontWeight: "600",
-          }}
-        >
-          Registrate
-        </Link>
-      </nav>
-
-      <Image src={logo} />
+      <Link
+        to="/reg"
+        style={{
+          color: "rgb(0, 55, 170)",
+          fontWeight: "600",
+        }}
+      >
+        Register
+      </Link>
+      <hr />
     </div>
   );
 }

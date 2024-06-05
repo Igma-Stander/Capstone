@@ -39,6 +39,12 @@ function Registration() {
       errors.lastName = "Must be 20 characters or less.";
     }
 
+    if (!values.userName) {
+      errors.userName = "Required";
+    } else if (values.userName.length > 15) {
+      errors.userName = "Must be shorter than 15 characters.";
+    }
+
     if (!values.email) {
       errors.email = "Required";
     } else if (
@@ -59,6 +65,7 @@ function Registration() {
       initialValues: {
         firstName: "",
         lastName: "",
+        userName: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -70,7 +77,7 @@ function Registration() {
     });
     return (
       <form onSubmit={formik.handleSubmit}>
-        <h1 style={{ color: "rgb(0, 55, 170)" }}>Sign up here</h1>
+        <h1 style={{ color: "rgb(191, 184, 184)" }}>Sign up here</h1>
         <label htmlFor="firstName" className="label">
           First Name
         </label>
@@ -103,6 +110,24 @@ function Registration() {
         />
         {formik.touched.lastName && formik.errors.lastName ? (
           <div>{formik.errors.lastName}</div>
+        ) : null}
+
+        <br />
+
+        <label htmlFor="userName" className="label">
+          User Name
+        </label>
+        <input
+          className="register"
+          id="userName"
+          name="userName"
+          type="text"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.userName}
+        />
+        {formik.touched.userName && formik.errors.userName ? (
+          <div>{formik.errors.userName}</div>
         ) : null}
 
         <br />
@@ -165,7 +190,7 @@ function Registration() {
         ) : null}
         <br />
 
-        <button type="submit" className="login">
+        <button type="submit" className="login" style={{ marginLeft: "60px" }}>
           Submit
         </button>
       </form>
@@ -173,6 +198,7 @@ function Registration() {
   };
   return (
     <div>
+      <br />
       <SignupForm />
     </div>
   );

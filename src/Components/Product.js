@@ -67,33 +67,48 @@ function Products() {
                     {selectedSize[product.id] || "Choose size"}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item
-                      onClick={() => handleSizeChange(product.id, "XSmall")}
-                    >
-                      X-Small
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      onClick={() => handleSizeChange(product.id, "Small")}
-                    >
-                      Small
-                    </Dropdown.Item>
+                    {product.id === 11 ? (
+                      [5, 6, 7, 8, 9, 10, 11, 12].map((size) => (
+                        <Dropdown.Item
+                          key={size}
+                          onClick={() =>
+                            handleSizeChange(product.id, size.toString())
+                          }
+                        >
+                          {size}
+                        </Dropdown.Item>
+                      ))
+                    ) : (
+                      <>
+                        <Dropdown.Item
+                          onClick={() => handleSizeChange(product.id, "XSmall")}
+                        >
+                          X-Small
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          onClick={() => handleSizeChange(product.id, "Small")}
+                        >
+                          Small
+                        </Dropdown.Item>
 
-                    <Dropdown.Item
-                      onClick={() => handleSizeChange(product.id, "Medium")}
-                    >
-                      Medium
-                    </Dropdown.Item>
+                        <Dropdown.Item
+                          onClick={() => handleSizeChange(product.id, "Medium")}
+                        >
+                          Medium
+                        </Dropdown.Item>
 
-                    <Dropdown.Item
-                      onClick={() => handleSizeChange(product.id, "Large")}
-                    >
-                      Large
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      onClick={() => handleSizeChange(product.id, "XLarge")}
-                    >
-                      X-Large
-                    </Dropdown.Item>
+                        <Dropdown.Item
+                          onClick={() => handleSizeChange(product.id, "Large")}
+                        >
+                          Large
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          onClick={() => handleSizeChange(product.id, "XLarge")}
+                        >
+                          X-Large
+                        </Dropdown.Item>
+                      </>
+                    )}
                   </Dropdown.Menu>
                 </Dropdown>
 

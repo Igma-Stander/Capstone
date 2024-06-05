@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
+  // had to change because of redux
   <Provider store={store}>
     <App />
   </Provider>

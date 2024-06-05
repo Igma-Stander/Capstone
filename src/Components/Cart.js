@@ -7,9 +7,10 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import ShippingModal from "../Modal/shippingModal";
 
-//using totalPrice as a prop
 function TotalPrice() {
   const [showModal, setShowModal] = useState("");
+
+  // using redux
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
@@ -20,14 +21,17 @@ function TotalPrice() {
   const removeCart = (item) => {
     dispatch(removeItem(item));
   };
+
   const totalPrice = cartItems.reduce(
     (total, item) => total + parseFloat(item.price),
     0
   );
 
+  // so that modal is able to close
   const handleModalClose = () => {
     setShowModal(false);
   };
+
   return (
     <div>
       <br />
@@ -35,9 +39,11 @@ function TotalPrice() {
       {cartItems.length > 0 ? (
         <div>
           <ul>
+            {/* map through items to get price and title */}
             {cartItems.map((item, index) => (
               <ul key={index}>
                 {item.title} - R{item.price}
+                {/* adding a remove button */}
                 <button
                   style={{
                     marginLeft: "10px",
@@ -53,14 +59,17 @@ function TotalPrice() {
           </ul>
         </div>
       ) : (
+        // shows when nothing is in cart
         <p>No items in cart</p>
       )}
       <hr />
+
       <Container>
         <p>Choose a method of shipment:</p>
         <Row>
           <Col></Col>
           <Col>
+            {/* can also add 50 to total price */}
             <Button
               variant="secondary"
               onClick={() => alert("You have chosen premium shipping")}
@@ -87,6 +96,7 @@ function TotalPrice() {
           </p>
         </Row>
       </Container>
+      {/* using modal */}
       <ShippingModal show={showModal} handleClose={handleModalClose} />
     </div>
   );

@@ -13,6 +13,7 @@ function App() {
       <div className="App">
         <Header />
         <br />
+        {/* creating route for navbar links */}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/products" element={<Store />} />

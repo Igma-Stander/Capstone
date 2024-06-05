@@ -3,13 +3,11 @@ import React from "react";
 
 import { useState } from "react";
 import Image from "react-bootstrap/Image";
-import { Routes, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Registration from "./Registration";
 
 import logo from "../Images/Logo.png";
 import img1 from "../Images/homepage.jpg";
@@ -26,6 +24,7 @@ function Home() {
     let passwordLower = /(?=.*[a-z])/;
     let passwordSpecial = /(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?\/~`\-="'])/;
 
+    // creating validation for inputs
     if (!values.password) {
       errors.password = "Required";
     } else if (values.password.length < 8) {
@@ -74,6 +73,7 @@ function Home() {
     };
 
     return (
+      // creating SignupForm
       <form onSubmit={formik.handleSubmit}>
         <label htmlFor="username" className="label">
           User Name
@@ -125,8 +125,6 @@ function Home() {
   let [name, setName] = useState("");
   let [loggedIn, setLoggedIn] = useState(false);
 
-  //if input is empty an alert will pop up
-
   //created to switch between login and logout
   let handleLogout = () => {
     setLoggedIn(false);
@@ -136,9 +134,11 @@ function Home() {
   return (
     <div>
       <Image src={logo} style={{ width: "350px" }} />
+
+      {/* only shows when user still needs to login */}
       {!loggedIn && <h4>Please log into your account.</h4>}
 
-      {/* if user is logged in this text will show with a logout button */}
+      {/* if user is logged in, this text will show with a logout button */}
       {loggedIn ? (
         <div>
           <h1>Welcome, {name}!</h1>
@@ -154,6 +154,8 @@ function Home() {
         </div>
       )}
       <hr />
+
+      {/* making a more attractive homepage */}
       <Container fluid>
         <Row>
           <Col>
@@ -200,6 +202,7 @@ function Home() {
         </Row>
       </Container>
 
+      {/* link to register tab */}
       <p style={{ fontWeight: "700" }}>
         Don't have a password yet? Sign up here
       </p>

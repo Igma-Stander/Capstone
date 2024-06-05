@@ -17,7 +17,7 @@
   padding: 5px;
 }
 
-/* both buttons in home component */
+/* both buttons in home component and register component */
 .login {
   padding: 7px;
   margin-top: 8px;
@@ -40,6 +40,7 @@
   font-size: xx-large;
 }
 
+/* used in about component */
 .footer {
   background-color: rgb(81, 13, 159);
   font-size: 16px;

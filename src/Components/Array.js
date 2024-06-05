@@ -99,5 +99,6 @@ let products = [
     image: belt,
   },
 ];
+//added an id component
 
 export default products;

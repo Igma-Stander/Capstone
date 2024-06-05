@@ -10,7 +10,7 @@ import logo from "../Images/Logo.png";
 import img1 from "../Images/logo2.png";
 import img2 from "../Images/about1.webp";
 
-//using the figures component
+//using the figure component
 function About() {
   return (
     <div>
@@ -36,8 +36,7 @@ function About() {
         </Figure.Caption>
       </Figure>
 
-      {/* 2 images of the store */}
-
+      {/* using bootstrap to make page more attractive */}
       <Container fluid>
         <hr />
         <Row>
@@ -69,7 +68,7 @@ function About() {
         </Row>
       </Container>
 
-      {/* making a footer of the contact details */}
+      {/* making a footer for the contact details */}
       <div className="footer">
         <Container>
           <Row className="col">

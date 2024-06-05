@@ -10,6 +10,7 @@ function Registration() {
     let passwordLower = /(?=.*[a-z])/;
     let passwordSpecial = /(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?\/~`\-="'])/;
 
+    // validation rules
     if (!values.password) {
       errors.password = "Required";
     } else if (values.password.length < 8) {
@@ -60,6 +61,7 @@ function Registration() {
     return errors;
   };
 
+  // all the diffrenet inputs
   let SignupForm = () => {
     let formik = useFormik({
       initialValues: {
@@ -76,6 +78,7 @@ function Registration() {
       },
     });
     return (
+      // creating the form
       <form onSubmit={formik.handleSubmit}>
         <h1 style={{ color: "rgb(191, 184, 184)" }}>Sign up here</h1>
         <label htmlFor="firstName" className="label">
@@ -199,6 +202,7 @@ function Registration() {
   return (
     <div>
       <br />
+      {/* calling the form */}
       <SignupForm />
     </div>
   );

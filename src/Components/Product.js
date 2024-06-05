@@ -13,16 +13,17 @@ import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 
 function Products() {
-  //used selectedColour for the dropdown button
+  //used selectedSize for the dropdown button
   let [selectedSize, setSelectedSize] = useState({});
 
   //used onButton to make sure the total price block only shows when buy is clicked
   let [onButton, setOnButton] = useState(false);
 
-  // const items = useSelector((state) => state.cart.items);
+  // using redux
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
+  // size changes when selected
   const handleSizeChange = (productID, size) => {
     setSelectedSize({ ...selectedSize, [productID]: size });
   };
@@ -32,6 +33,7 @@ function Products() {
     setOnButton(true);
   };
 
+  // used for total price in corner
   const totalPrice = cartItems.reduce(
     (total, product) => total + parseFloat(product.price),
     0
@@ -44,6 +46,7 @@ function Products() {
       <br />
       <Container>
         <Row>
+          {/* mapping through array */}
           {products.map((product) => (
             <Col key={product.id} xs={4}>
               <div>
@@ -61,12 +64,12 @@ function Products() {
                 <p className="price">R{product.price}</p>
 
                 {/* followed instructions for the dropdown button */}
-
                 <Dropdown>
                   <Dropdown.Toggle variant="secondary">
                     {selectedSize[product.id] || "Choose size"}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
+                    {/* only diffrent size options for item 11 */}
                     {product.id === 11 ? (
                       [5, 6, 7, 8, 9, 10, 11, 12].map((size) => (
                         <Dropdown.Item
@@ -79,7 +82,9 @@ function Products() {
                         </Dropdown.Item>
                       ))
                     ) : (
+                      // empty tag because need parent
                       <>
+                        {/* sizes for everything else */}
                         <Dropdown.Item
                           onClick={() => handleSizeChange(product.id, "XSmall")}
                         >
@@ -112,6 +117,7 @@ function Products() {
                   </Dropdown.Menu>
                 </Dropdown>
 
+                {/* add to cart button */}
                 <Button
                   style={{
                     marginTop: "10px",
@@ -121,6 +127,8 @@ function Products() {
                 >
                   Add to cart
                 </Button>
+
+                {/* price with link to cart */}
                 {onButton && (
                   <Link to="/cart">
                     <p className="total">

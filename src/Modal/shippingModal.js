@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
 
+// modal for when help is needed for the shipping options
 function ShippingModal({ show, handleClose }) {
   return (
     <Modal show={show} onHide={handleClose}>

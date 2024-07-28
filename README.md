@@ -14,14 +14,19 @@ In the command line interface, you can do the following:
 
 This installs the project dependencies.
 
+### `npm install --save react-bootstrap bootstrap`
+
+This installs the bootstrap needed for the styling.
+
 ## Usage
 
 To start the application type the following in the command line interface:
 
 ### `npm start`
 
-This runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This runs the app in the development mode.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Render
+https://react-capstone-hhkc.onrender.com  
+
+
